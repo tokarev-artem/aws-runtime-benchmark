@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci --no-fund --no-audit
+    build:
+      commands:
+        # Amplify passes environment variables to the build only. Server-side code
+        # reads them at runtime, so write the ones it needs into .env.production.
+        - env | grep -E '^(RUNTIME_NAME|TABLE_NAME|APP_REGION)=' >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - node_modules/**/*
