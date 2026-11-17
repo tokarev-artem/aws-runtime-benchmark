@@ -8,7 +8,8 @@ frontend:
       commands:
         # Amplify passes environment variables to the build only. Server-side code
         # reads them at runtime, so write the ones it needs into .env.production.
-        - env | grep -E '^(RUNTIME_NAME|TABLE_NAME|APP_REGION)=' >> .env.production
+        # grep exits 1 when nothing matches, which would fail the build: keep '|| true'.
+        - env | grep -E '^(RUNTIME_NAME|TABLE_NAME|APP_REGION)=' >> .env.production || true
         - npm run build
   artifacts:
     baseDirectory: .next
