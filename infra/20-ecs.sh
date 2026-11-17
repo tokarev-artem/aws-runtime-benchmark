@@ -7,7 +7,7 @@ EXEC_ROLE="$NAME-ecs-exec"; TASK_ROLE="$NAME-ecs-task"; LOGS="/ecs/$NAME"
 
 VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true --query 'Vpcs[0].VpcId' --output text)
 SUBNETS=$(aws ec2 describe-subnets --filters Name=vpc-id,Values="$VPC" Name=default-for-az,Values=true \
-  --query 'Subnets[].SubnetId' --output text)
+  --query 'Subnets[].SubnetId' --output text | tr '\t' ' ')
 echo "VPC=$VPC SUBNETS=$SUBNETS"
 
 trust() { echo "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"$1\"},\"Action\":\"sts:AssumeRole\"}]}"; }
