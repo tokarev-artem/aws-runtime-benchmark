@@ -24,7 +24,10 @@ if [ -n "$ALB_ARN" ] && [ "$ALB_ARN" != "None" ]; then
   aws elbv2 wait load-balancers-deleted --load-balancer-arns "$ALB_ARN"
 fi
 TG_ARN=$(aws elbv2 describe-target-groups --names "$NAME" --query 'TargetGroups[0].TargetGroupArn' --output text 2>/dev/null)
-[ -n "$TG_ARN" ] && [ "$TG_ARN" != "None" ] && aws elbv2 delete-target-group --target-group-arn "$TG_ARN"
+# The listener goes away a little after the load balancer, so retry for up to 2 minutes.
+if [ -n "$TG_ARN" ] && [ "$TG_ARN" != "None" ]; then
+  for i in $(seq 1 12); do aws elbv2 delete-target-group --target-group-arn "$TG_ARN" 2>/dev/null && break; sleep 10; done
+fi
 
 log "Security groups (retry while ENIs are released)"
 VPC=$(aws ec2 describe-vpcs --filters Name=is-default,Values=true --query 'Vpcs[0].VpcId' --output text)
@@ -47,7 +50,9 @@ done
 log "ECR repository, DynamoDB table, log groups"
 aws ecr delete-repository --repository-name "$NAME" --force >/dev/null 2>&1
 aws dynamodb delete-table --table-name "$TABLE" >/dev/null 2>&1
-for lg in "/ecs/$NAME" "/aws/lambda/$NAME" "/aws/lambda/web/$NAME-web"; do aws logs delete-log-group --log-group-name "$lg" 2>/dev/null; done
+for lg in $(aws logs describe-log-groups --query "logGroups[?starts_with(logGroupName,'/ecs/$NAME') || starts_with(logGroupName,'/aws/lambda/$NAME') || starts_with(logGroupName,'/aws/lambda/web/$NAME')].logGroupName" --output text); do
+  aws logs delete-log-group --log-group-name "$lg" && echo "deleted $lg"   # Web Function log groups have a suffix, for example .local
+done
 
 log "IAM roles"
 for r in "$NAME-lambda" "$NAME-web" "$NAME-ecs-exec" "$NAME-ecs-task" "$NAME-amplify-compute"; do
@@ -59,6 +64,11 @@ for r in "$NAME-lambda" "$NAME-web" "$NAME-ecs-exec" "$NAME-ecs-task" "$NAME-amp
   aws iam delete-role --role-name "$r" && echo "deleted $r"
 done
 
-log "Anything still tagged project=$NAME"
+# The deploy bucket is shared by all Web Functions in the account and Region; remove it only if it is empty.
+aws s3api delete-bucket --bucket "awscli-lambdaweb-$ACCOUNT-$AWS_REGION-an" 2>/dev/null && echo "deleted empty bucket awscli-lambdaweb-$ACCOUNT-$AWS_REGION-an"
+
+echo "Note: Amplify creates an AmplifySSRLoggingRole-<id> role and policy for each app. Delete the one for this app in IAM."
+
+log "Anything still tagged project=$NAME (the tagging API can show deleted resources for a few minutes)"
 aws resourcegroupstaggingapi get-resources --tag-filters Key=project,Values="$NAME" \
   --query 'ResourceTagMappingList[].ResourceARN' --output text
