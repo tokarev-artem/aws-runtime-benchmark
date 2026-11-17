@@ -1,0 +1,6 @@
+skip lambda: LAMBDA_URL not set
+{"runtime":"web","target":"https://n8bt3k2gxh566hqs.2cs.lambda-web.eu-central-1.on.aws","endpoint":"/","rate":10,"requests":1200,"failed":0,"min":29.821,"p50":43.345,"p95":138.25525000000002,"p99":182.69457999999992,"max":569.429,"dropped":0}
+{"runtime":"web","target":"https://n8bt3k2gxh566hqs.2cs.lambda-web.eu-central-1.on.aws","endpoint":"/api/item","rate":10,"requests":1201,"failed":0,"min":26.068,"p50":36.055,"p95":123.199,"p99":203.281,"max":521.635,"dropped":0}
+{"runtime":"web","target":"https://n8bt3k2gxh566hqs.2cs.lambda-web.eu-central-1.on.aws","endpoint":"/api/cpu","rate":10,"requests":1201,"failed":0,"min":66.576,"p50":101.689,"p95":200.018,"p99":275.99,"max":399.917,"dropped":0}
+skip ecs: ECS_URL not set
+skip amplify: AMPLIFY_URL not set

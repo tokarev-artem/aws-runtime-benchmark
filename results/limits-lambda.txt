@@ -1,0 +1,12 @@
+lambda sleep   10s -> 200 after 10.210448s
+lambda sleep   29s -> 200 after 29.206703s
+lambda sleep   31s -> 502 after 30.163929s
+lambda sleep   60s -> 502 after 31.062070s
+lambda sleep   61s -> 502 after 30.163700s
+lambda sleep  120s -> 502 after 30.242731s
+lambda size     1MB -> 200 1048576 bytes
+lambda size     5MB -> 200 5242880 bytes
+lambda size     6MB -> 502 21 bytes
+lambda size     7MB -> 502 21 bytes
+lambda size    10MB -> 502 21 bytes
+lambda size    20MB -> 502 21 bytes

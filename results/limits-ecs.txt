@@ -1,0 +1,12 @@
+ecs sleep   10s -> 200 after 10.186389s
+ecs sleep   29s -> 200 after 29.171328s
+ecs sleep   31s -> 200 after 31.116262s
+ecs sleep   60s -> 504 after 60.062242s
+ecs sleep   61s -> 504 after 60.078989s
+ecs sleep  120s -> 504 after 60.109644s
+ecs size     1MB -> 200 1048576 bytes
+ecs size     5MB -> 200 5242880 bytes
+ecs size     6MB -> 200 6291456 bytes
+ecs size     7MB -> 200 7340032 bytes
+ecs size    10MB -> 200 10485760 bytes
+ecs size    20MB -> 200 20971520 bytes

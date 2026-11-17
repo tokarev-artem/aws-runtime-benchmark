@@ -1,0 +1,13 @@
+{
+  "target": "https://n8bt3k2gxh566hqs.2cs.lambda-web.eu-central-1.on.aws",
+  "endpoint": "/",
+  "rate": 200,
+  "requests": 24000,
+  "failed": 0,
+  "min": 26.322,
+  "p50": 44.593500000000006,
+  "p95": 132.4869999999999,
+  "p99": 200.08215999999996,
+  "max": 650.066,
+  "dropped": 0
+}

@@ -1,0 +1,12 @@
+amplify sleep   10s -> 200 after 11.808064s
+amplify sleep   29s -> 504 after 28.124924s
+amplify sleep   31s -> 504 after 28.170505s
+amplify sleep   60s -> 504 after 28.120866s
+amplify sleep   61s -> 504 after 28.168340s
+amplify sleep  120s -> 504 after 28.147299s
+amplify size     1MB -> 200 1048576 bytes
+amplify size     5MB -> 200 5242880 bytes
+amplify size     6MB -> 413 0 bytes
+amplify size     7MB -> 413 0 bytes
+amplify size    10MB -> 413 0 bytes
+amplify size    20MB -> 413 0 bytes

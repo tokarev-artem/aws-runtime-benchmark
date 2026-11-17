@@ -34,16 +34,23 @@ for g in "$NAME-task" "$NAME-alb"; do
   for i in $(seq 1 12); do aws ec2 delete-security-group --group-id "$id" 2>/dev/null && break; sleep 10; done
 done
 
-log "Lambda function"
+log "Lambda function and Web Function"
 aws lambda delete-function --function-name "$NAME" 2>/dev/null
+aws lambda-web delete-web-function --function-name "$NAME-web" 2>/dev/null
+# "aws lambda-web deploy" keeps code in a shared versioned bucket: awscli-lambdaweb-<account>-<region>-an
+for v in $(aws s3api list-object-versions --bucket "awscli-lambdaweb-$ACCOUNT-$AWS_REGION-an" --prefix "lambda-web/$NAME-web/" \
+    --query '[Versions[].[Key,VersionId],DeleteMarkers[].[Key,VersionId]][]' --output text 2>/dev/null | tr '\t' '|'); do
+  [ "$v" = "None" ] && continue
+  aws s3api delete-object --bucket "awscli-lambdaweb-$ACCOUNT-$AWS_REGION-an" --key "${v%%|*}" --version-id "${v##*|}" >/dev/null
+done
 
 log "ECR repository, DynamoDB table, log groups"
 aws ecr delete-repository --repository-name "$NAME" --force >/dev/null 2>&1
 aws dynamodb delete-table --table-name "$TABLE" >/dev/null 2>&1
-for lg in "/ecs/$NAME" "/aws/lambda/$NAME"; do aws logs delete-log-group --log-group-name "$lg" 2>/dev/null; done
+for lg in "/ecs/$NAME" "/aws/lambda/$NAME" "/aws/lambda/web/$NAME-web"; do aws logs delete-log-group --log-group-name "$lg" 2>/dev/null; done
 
 log "IAM roles"
-for r in "$NAME-lambda" "$NAME-ecs-exec" "$NAME-ecs-task" "$NAME-amplify-compute"; do
+for r in "$NAME-lambda" "$NAME-web" "$NAME-ecs-exec" "$NAME-ecs-task" "$NAME-amplify-compute"; do
   aws iam get-role --role-name "$r" >/dev/null 2>&1 || continue
   for p in $(aws iam list-role-policies --role-name "$r" --query 'PolicyNames[]' --output text); do
     aws iam delete-role-policy --role-name "$r" --policy-name "$p"; done
