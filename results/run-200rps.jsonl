@@ -1,0 +1,9 @@
+{"runtime":"lambda","target":"https://qgdf4kjybjpxl2hth4vyvqdgie0jllgx.lambda-url.eu-central-1.on.aws","endpoint":"/","rate":200,"requests":24001,"failed":0,"min":31.444,"p50":42.379,"p95":116.228,"p99":281.114,"max":2134.094,"dropped":0}
+{"runtime":"lambda","target":"https://qgdf4kjybjpxl2hth4vyvqdgie0jllgx.lambda-url.eu-central-1.on.aws","endpoint":"/api/item","rate":200,"requests":24001,"failed":0,"min":29.353,"p50":35.636,"p95":104.594,"p99":126.314,"max":297.678,"dropped":0}
+{"runtime":"lambda","target":"https://qgdf4kjybjpxl2hth4vyvqdgie0jllgx.lambda-url.eu-central-1.on.aws","endpoint":"/api/cpu","rate":200,"requests":24001,"failed":0,"min":112.473,"p50":182.402,"p95":258.472,"p99":297.103,"max":480.916,"dropped":0}
+{"runtime":"ecs","target":"http://runtime-benchmark-594828388.eu-central-1.elb.amazonaws.com","endpoint":"/","rate":200,"requests":22445,"failed":0.292091779906438,"min":117.814,"p50":2227.41,"p95":45394.74139999999,"p99":60001.058,"max":60026.115,"dropped":1556}
+{"runtime":"ecs","target":"http://runtime-benchmark-594828388.eu-central-1.elb.amazonaws.com","endpoint":"/api/item","rate":200,"requests":23080,"failed":0.013951473136915077,"min":0,"p50":58.3395,"p95":2375.119949999996,"p99":19495.89609,"max":60005.287,"dropped":919}
+skip ecs /api/cpu
+{"runtime":"amplify","target":"https://main.d2d4v7sdazpf0b.amplifyapp.com","endpoint":"/","rate":200,"requests":23904,"failed":0,"min":52.774,"p50":86.7175,"p95":229.75229999999993,"p99":1702.3400399999998,"max":2059.414,"dropped":96}
+{"runtime":"amplify","target":"https://main.d2d4v7sdazpf0b.amplifyapp.com","endpoint":"/api/item","rate":200,"requests":24001,"failed":0,"min":39.111,"p50":66.739,"p95":172.129,"p99":340.015,"max":763.763,"dropped":0}
+{"runtime":"amplify","target":"https://main.d2d4v7sdazpf0b.amplifyapp.com","endpoint":"/api/cpu","rate":200,"requests":24001,"failed":0,"min":152.901,"p50":217.018,"p95":312.235,"p99":372.676,"max":576.87,"dropped":0}

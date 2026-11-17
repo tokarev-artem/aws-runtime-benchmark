@@ -8,6 +8,8 @@ ENV STANDALONE=1 NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 FROM node:22-alpine
+# Pick up security fixes released after the base image was built (ECR scan found a critical zlib CVE).
+RUN apk upgrade --no-cache
 # Lambda Web Adapter: a Lambda extension that turns invoke events into HTTP requests
 # to the web server below. Outside Lambda (on ECS) it is never started.
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 /lambda-adapter /opt/extensions/lambda-adapter

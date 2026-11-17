@@ -1,0 +1,13 @@
+{
+  "target": "https://qgdf4kjybjpxl2hth4vyvqdgie0jllgx.lambda-url.eu-central-1.on.aws",
+  "endpoint": "/api/item",
+  "rate": 50,
+  "requests": 5904,
+  "failed": 0,
+  "min": 29.663,
+  "p50": 36.8245,
+  "p95": 118.04465,
+  "p99": 442.2559499999998,
+  "max": 58787.776,
+  "dropped": 96
+}

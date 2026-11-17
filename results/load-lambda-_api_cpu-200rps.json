@@ -1,0 +1,13 @@
+{
+  "target": "https://qgdf4kjybjpxl2hth4vyvqdgie0jllgx.lambda-url.eu-central-1.on.aws",
+  "endpoint": "/api/cpu",
+  "rate": 200,
+  "requests": 24001,
+  "failed": 0,
+  "min": 112.473,
+  "p50": 182.402,
+  "p95": 258.472,
+  "p99": 297.103,
+  "max": 480.916,
+  "dropped": 0
+}

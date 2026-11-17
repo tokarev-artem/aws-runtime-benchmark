@@ -1,0 +1,13 @@
+{
+  "target": "http://runtime-benchmark-594828388.eu-central-1.elb.amazonaws.com",
+  "endpoint": "/",
+  "rate": 200,
+  "requests": 22445,
+  "failed": 0.292091779906438,
+  "min": 117.814,
+  "p50": 2227.41,
+  "p95": 45394.74139999999,
+  "p99": 60001.058,
+  "max": 60026.115,
+  "dropped": 1556
+}

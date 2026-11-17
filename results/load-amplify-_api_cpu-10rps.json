@@ -1,0 +1,13 @@
+{
+  "target": "https://main.d2d4v7sdazpf0b.amplifyapp.com",
+  "endpoint": "/api/cpu",
+  "rate": 10,
+  "requests": 1200,
+  "failed": 0,
+  "min": 173.166,
+  "p50": 206.32850000000002,
+  "p95": 302.20645,
+  "p99": 477.1182799999998,
+  "max": 14173.731,
+  "dropped": 1
+}

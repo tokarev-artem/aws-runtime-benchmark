@@ -1,0 +1,13 @@
+{
+  "target": "https://main.d2d4v7sdazpf0b.amplifyapp.com",
+  "endpoint": "/api/item",
+  "rate": 10,
+  "requests": 1200,
+  "failed": 0,
+  "min": 42.665,
+  "p50": 52.658,
+  "p95": 120.19684999999991,
+  "p99": 136.05421,
+  "max": 199.857,
+  "dropped": 0
+}

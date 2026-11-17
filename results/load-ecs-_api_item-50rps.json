@@ -1,0 +1,13 @@
+{
+  "target": "http://runtime-benchmark-594828388.eu-central-1.elb.amazonaws.com",
+  "endpoint": "/api/item",
+  "rate": 50,
+  "requests": 6000,
+  "failed": 0,
+  "min": 21.884,
+  "p50": 25.355,
+  "p95": 94.66309999999999,
+  "p99": 117.95433999999999,
+  "max": 202.718,
+  "dropped": 0
+}
